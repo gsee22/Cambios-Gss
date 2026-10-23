@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAMBIOS G'S | Tasas del Día</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --brand-red: #7a0f0f;
+      --brand-red-dark: #8E0000;
+      --brand-gradient: linear-gradient(135deg, #b63232 0%, #c72d2d 50%, #6b0404 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      color: #1e1e1e;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .rate-pill {
+      background: linear-gradient(180deg, #D32F2F 0%, #A00000 60%, #6B0000 100%);
+      border-radius: 9999px;
+      padding: 0.4rem 1rem 0.4rem 0.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 15px rgba(183, 28, 28, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .rate-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(183, 28, 28, 0.4);
+    }
+
+    .flag-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 768px) {
+      .flag-circle {
+        width: 52px;
+        height: 52px;
+      }
+    }
+
+    .rate-number {
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      line-height: 1;
+      padding-left: 0.75rem;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    @media (min-width: 768px) {
+      .rate-number {
+        font-size: 2.1rem;
+        padding-left: 1rem;
+      }
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .glass-card {
+        border-radius: 24px;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-12 flex flex-col justify-between">
+
+  <div>
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-40">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+        <a href="#" class="flex items-center gap-2.5 text-red-700 font-extrabold text-lg sm:text-xl tracking-tight">
+          <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-paper-plane text-sm sm:text-base"></i>
+          </div>
+          <span>CAMBIOS G'S</span>
+        </a>
+        <button onclick="openAdmin()" class="text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-xl transition flex items-center gap-1.5 active:scale-95">
+          <i class="fa-solid fa-lock text-red-600"></i> Panel Admin
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-red-800 via-red-600 to-red-900 text-white py-8 sm:py-10 px-4 text-center shadow-inner mb-6 sm:mb-8">
+      <div class="max-w-3xl mx-auto">
+        <span class="bg-white/20 text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">Oficial del día</span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mt-2.5 sm:mt-3 tracking-tight">Tasas de Cambio a Venezuela</h1>
+        <p class="text-red-100 text-xs sm:text-sm md:text-base mt-2 opacity-90 max-w-lg mx-auto">Cotiza tu envío al instante con la mejor tasa del mercado.</p>
+      </div>
+    </section>
+
+    <!-- Main Content (Grid de 2 columnas en escritorio) -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+
+      <!-- Seccion Tasas del Dia (Pill Cards con Imágenes) -->
+      <div class="lg:col-span-5 flex flex-col gap-3.5">
+        <div class="flex items-center justify-between mb-0.5">
+          <h2 class="text-base sm:text-lg font-extrabold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-fire text-red-600"></i> Tasas del Día
+          </h2>
+          <span class="text-xs text-gray-500 font-medium">Actualizado hoy</span>
+        </div>
+
+        <!-- PERÚ -->
+        <div class="rate-pill">
+          <div class="flag-circle" title="Perú">
+            <img src="https://flagcdn.com/w80/pe.png" alt="Perú" class="w-full h-full object-cover">
+          </div>
+          <div class="rate-number" id="pill-PEN">235</div>
+        </div>
+
+        <!-- MÉXICO -->
+        <div class="rate-pill">
+          <div class="flag-circle" title="México">
+            <img src="https://flagcdn.com/w80/mx.png" alt="México" class="w-full h-full object-cover">
+          </div>
+          <div class="rate-number" id="pill-MXN">45</div>
+        </div>
+
+        <!-- COLOMBIA -->
+        <div class="rate-pill">
+          <div class="flag-circle" title="Colombia">
+            <img src="https://flagcdn.com/w80/co.png" alt="Colombia" class="w-full h-full object-cover">
+          </div>
+          <div class="rate-number" id="pill-COP">3.75</div>
+        </div>
+
+        <!-- ESPAÑA / EUROPA -->
+        <div class="rate-pill">
+          <div class="flag-circle" title="España / Europa">
+            <img src="https://flagcdn.com/w80/es.png" alt="España" class="w-full h-full object-cover">
+          </div>
+          <div class="rate-number" id="pill-EUR">960</div>
+        </div>
+
+        <!-- EE.UU. / USD -->
+        <div class="rate-pill">
+          <div class="flag-circle" title="Estados Unidos">
+            <img src="https://flagcdn.com/w80/us.png" alt="Estados Unidos" class="w-full h-full object-cover">
+          </div>
+          <div class="rate-number" id="pill-USD">1020</div>
+        </div>
+      </div>
+
+      <!-- Calculadora de Envíos -->
+      <div class="lg:col-span-7">
+        <div class="glass-card p-5 sm:p-7 md:p-8">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-4 mb-5 sm:mb-6">
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold text-gray-900">Calculadora de Envío</h3>
+              <p class="text-xs text-gray-500">Ingresa el monto para calcular la transferencia</p>
+            </div>
+            <div class="w-9 h-9 sm:w-10 sm:h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center font-bold text-base sm:text-lg flex-shrink-0">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+          </div>
+
+          <!-- Selección Moneda Origen -->
+          <div class="mb-5">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Moneda de origen</label>
+            <div class="grid grid-cols-5 gap-1.5 sm:gap-2" id="currencySelector">
+              <button onclick="selectCurrency('PEN')" id="btn-PEN" class="currency-btn py-2 px-0.5 sm:px-1 border-2 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 border-red-600 bg-red-50 text-red-700 font-bold">
+                <span class="text-lg sm:text-xl">🇵🇪</span>
+                <span class="text-[10px] sm:text-xs">PEN</span>
+              </button>
+              <button onclick="selectCurrency('MXN')" id="btn-MXN" class="currency-btn py-2 px-0.5 sm:px-1 border-2 border-gray-200 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 hover:border-gray-300 font-semibold text-gray-600">
+                <span class="text-lg sm:text-xl">🇲🇽</span>
+                <span class="text-[10px] sm:text-xs">MXN</span>
+              </button>
+              <button onclick="selectCurrency('COP')" id="btn-COP" class="currency-btn py-2 px-0.5 sm:px-1 border-2 border-gray-200 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 hover:border-gray-300 font-semibold text-gray-600">
+                <span class="text-lg sm:text-xl">🇨🇴</span>
+                <span class="text-[10px] sm:text-xs">COP</span>
+              </button>
+              <button onclick="selectCurrency('EUR')" id="btn-EUR" class="currency-btn py-2 px-0.5 sm:px-1 border-2 border-gray-200 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 hover:border-gray-300 font-semibold text-gray-600">
+                <span class="text-lg sm:text-xl">🇪🇸</span>
+                <span class="text-[10px] sm:text-xs">EUR</span>
+              </button>
+              <button onclick="selectCurrency('USD')" id="btn-USD" class="currency-btn py-2 px-0.5 sm:px-1 border-2 border-gray-200 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 hover:border-gray-300 font-semibold text-gray-600">
+                <span class="text-lg sm:text-xl">🇺🇸</span>
+                <span class="text-[10px] sm:text-xs">USD</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inputs de Montos -->
+          <div class="space-y-3.5 sm:space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Tú envías</label>
+              <div class="relative">
+                <input type="number" id="sendAmount" value="100" oninput="calculate()" class="w-full text-xl sm:text-2xl font-extrabold text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-2.5 sm:py-3 focus:outline-none focus:border-red-600 transition">
+                <span id="currencySymbol" class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-gray-400 text-sm sm:text-base">PEN</span>
+              </div>
+            </div>
+
+            <div class="flex justify-center my-1">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold shadow-sm">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1">Reciben en Venezuela</label>
+              <div class="relative">
+                <input type="text" id="receiveAmount" readonly placeholder="0.00" class="w-full text-xl sm:text-2xl font-extrabold text-red-700 bg-red-50/60 border-2 border-red-200 rounded-xl px-4 py-2.5 sm:py-3 focus:outline-none">
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-red-500 text-sm sm:text-base">VES</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resumen de Cotización -->
+          <div class="mt-5 sm:mt-6 bg-gray-50 rounded-xl p-3.5 sm:p-4 border border-gray-100 text-xs sm:text-sm space-y-2">
+            <div class="flex justify-between text-gray-600">
+              <span>Tasa configurada:</span>
+              <span id="appliedRateText" class="font-bold text-gray-900">235</span>
+            </div>
+            <div class="flex justify-between text-gray-600 pt-2 border-t border-gray-200 font-bold text-sm sm:text-base text-gray-900">
+              <span>Monto total a pagar:</span>
+              <span id="totalPayText" class="text-red-600">100 PEN</span>
+            </div>
+          </div>
+
+          <!-- Botón WhatsApp -->
+          <button onclick="sendWhatsApp()" class="w-full mt-5 sm:mt-6 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-extrabold py-3.5 sm:py-4 px-6 rounded-xl shadow-lg shadow-green-600/20 transition flex items-center justify-center gap-2.5 text-base sm:text-lg active:scale-[0.98]">
+            <i class="fa-brands fa-whatsapp text-xl sm:text-2xl"></i> Enviar por WhatsApp
+          </button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-12 text-center text-xs text-gray-400">
+    <p>CAMBIOS G'S © 2026 — Todos los derechos reservados</p>
+  </footer>
+
+  <!-- Panel Admin Modal -->
+  <div id="adminModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-red-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3.5 mb-3.5 border-b border-gray-100">
+        <h3 class="font-extrabold text-base sm:text-lg text-gray-900 flex items-center gap-2">
+          <i class="fa-solid fa-pen-to-square text-red-600"></i> Actualizar Tasas Directas
+        </h3>
+        <button onclick="closeAdmin()" class="text-gray-400 hover:text-gray-600 text-2xl font-bold p-1">&times;</button>
+      </div>
+
+      <p class="text-xs text-gray-500 mb-4">Ingresa únicamente el número que quieres que aparezca en la tarjeta de cada país.</p>
+
+      <div class="space-y-3">
+        <div>
+          <label class="text-xs font-bold text-gray-700 flex items-center gap-2 mb-1">
+            <span>🇵🇪</span> Perú (PEN):
+          </label>
+          <input type="number" step="any" id="input-PEN" class="w-full border-2 border-gray-200 rounded-lg p-2.5 font-bold text-gray-800 focus:border-red-600 outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 flex items-center gap-2 mb-1">
+            <span>🇲🇽</span> México (MXN):
+          </label>
+          <input type="number" step="any" id="input-MXN" class="w-full border-2 border-gray-200 rounded-lg p-2.5 font-bold text-gray-800 focus:border-red-600 outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 flex items-center gap-2 mb-1">
+            <span>🇨🇴</span> Colombia (COP):
+          </label>
+          <input type="number" step="any" id="input-COP" class="w-full border-2 border-gray-200 rounded-lg p-2.5 font-bold text-gray-800 focus:border-red-600 outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 flex items-center gap-2 mb-1">
+            <span>🇪🇸</span> España (EUR):
+          </label>
+          <input type="number" step="any" id="input-EUR" class="w-full border-2 border-gray-200 rounded-lg p-2.5 font-bold text-gray-800 focus:border-red-600 outline-none text-sm">
+        </div>
+
+        <div>
+          <label class="text-xs font-bold text-gray-700 flex items-center gap-2 mb-1">
+            <span>🇺🇸</span> EE.UU. (USD):
+          </label>
+          <input type="number" step="any" id="input-USD" class="w-full border-2 border-gray-200 rounded-lg p-2.5 font-bold text-gray-800 focus:border-red-600 outline-none text-sm">
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-3">
+        <button onclick="closeAdmin()" class="w-1/2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3 rounded-xl text-sm transition">Cancelar</button>
+        <button onclick="saveAdminRates()" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-lg shadow-red-600/30">Guardar Tasas</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    
+   const ADMIN_KEY = "MTE0ODYyMjc=";
+    let selectedCurrency = "PEN";
+
+    // Tasas cargadas o iniciales
+    let rates = JSON.parse(localStorage.getItem('pureNumberRates')) || {
+      PEN: 235,
+      MXN: 45,
+      COP: 3.75,
+      EUR: 960,
+      USD: 1020
+    };
+
+    function updatePillDisplay() {
+      document.getElementById('pill-PEN').innerText = rates.PEN ?? '---';
+      document.getElementById('pill-MXN').innerText = rates.MXN ?? '---';
+      document.getElementById('pill-COP').innerText = rates.COP ?? '---';
+      document.getElementById('pill-EUR').innerText = rates.EUR ?? '---';
+      document.getElementById('pill-USD').innerText = rates.USD ?? '---';
+
+      calculate();
+    }
+
+    function selectCurrency(curr) {
+      selectedCurrency = curr;
+      document.querySelectorAll('.currency-btn').forEach(btn => {
+        btn.className = "currency-btn py-2 px-0.5 sm:px-1 border-2 border-gray-200 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 hover:border-gray-300 font-semibold text-gray-600";
+      });
+
+      const activeBtn = document.getElementById(`btn-${curr}`);
+      if (activeBtn) {
+        activeBtn.className = "currency-btn py-2 px-0.5 sm:px-1 border-2 rounded-xl text-center transition flex flex-col items-center gap-0.5 sm:gap-1 border-red-600 bg-red-50 text-red-700 font-bold";
+      }
+
+      document.getElementById('currencySymbol').innerText = curr;
+      calculate();
+    }
+
+    function calculate() {
+      const sendAmt = parseFloat(document.getElementById('sendAmount').value) || 0;
+      const rateNumber = parseFloat(rates[selectedCurrency]) || 0;
+
+      let totalReceived = 0;
+      if (rateNumber > 0) {
+        if (selectedCurrency === 'COP') {
+          totalReceived = sendAmt / rateNumber;
+        } else {
+          totalReceived = sendAmt * rateNumber;
+        }
+      }
+      document.getElementById('receiveAmount').value = totalReceived.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('appliedRateText').innerText = `${rateNumber}`;
+      document.getElementById('totalPayText').innerText = `${sendAmt.toLocaleString()} ${selectedCurrency}`;
+    }
+
+    // Función auxiliar para convertir el texto ingresado en un hash SHA-256
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function openAdmin() {
+      const pass = prompt("Ingresa la clave de administrador:");
+      if (pass !== null) {
+        if (btoa(pass) === ADMIN_KEY) {
+          document.getElementById('input-PEN').value = rates.PEN || '';
+          document.getElementById('input-MXN').value = rates.MXN || '';
+          document.getElementById('input-COP').value = rates.COP || '';
+          document.getElementById('input-EUR').value = rates.EUR || '';
+          document.getElementById('input-USD').value = rates.USD || '';
+          document.getElementById('adminModal').classList.remove('hidden');
+        } else {
+          alert("Contraseña incorrecta.");
+        }
+      }
+    }
+
+    function closeAdmin() {
+      document.getElementById('adminModal').classList.add('hidden');
+    }
+
+    function saveAdminRates() {
+      rates = {
+        PEN: parseFloat(document.getElementById('input-PEN').value) || 0,
+        MXN: parseFloat(document.getElementById('input-MXN').value) || 0,
+        COP: parseFloat(document.getElementById('input-COP').value) || 0,
+        EUR: parseFloat(document.getElementById('input-EUR').value) || 0,
+        USD: parseFloat(document.getElementById('input-USD').value) || 0
+      };
+
+      localStorage.setItem('pureNumberRates', JSON.stringify(rates));
+      closeAdmin();
+      updatePillDisplay();
+    }
+
+    function sendWhatsApp() {
+      const sendAmt = document.getElementById('sendAmount').value;
+      const receiveAmt = document.getElementById('receiveAmount').value;
+      const text = `Hola, quiero consultar para hacer un envío de ${sendAmt} ${selectedCurrency} a Venezuela. Recibe aprox: ${receiveAmt} VES.`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // Inicializar
+    updatePillDisplay();
+  </script>
+</body>
+</html>
